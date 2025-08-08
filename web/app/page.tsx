@@ -14,6 +14,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export default function Home() {
   const [titleNumber, setTitleNumber] = useState(0);
@@ -29,11 +30,14 @@ export default function Home() {
 
   return (
     <div className="w-full">
-      <div className="container mx-auto">
+      <div className="container mx-auto relative">
+        <div className="absolute top-4 right-4">
+          <ModeToggle />
+        </div>
         <div className="flex gap-8 py-20 lg:py-40 items-center justify-center flex-col">
           <div>
             <Button variant="secondary" size="sm" className="gap-4" aria-label="Introdução ao quiz">
-              Vem com a gente que esse quiz vai te deixar afiado! ;)
+              Vem com a gente que esse quiz vai te deixar afiado ;p
             </Button>
           </div>
           <div className="flex gap-4 flex-col">

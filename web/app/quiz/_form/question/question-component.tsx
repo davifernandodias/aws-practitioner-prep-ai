@@ -9,7 +9,7 @@ export default function QuestionComponent () {
     return (
         <div>
             <form action={action}>
-                
+
             </form>
         </div>
     )
