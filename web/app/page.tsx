@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Settings, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,10 +17,15 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { ModeToggle } from "@/components/mode-toggle";
+import QuestionConfigAmount from "./_form/config/config-question";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function Home() {
   const [titleNumber, setTitleNumber] = useState(0);
+  const [isPeding, setPeding] = useState(false);
   const titles = ["errando.", "acertando."];
+  const router = useRouter();
+
 
   useEffect(() => {
     if (titles.length === 0) return;
@@ -27,6 +34,19 @@ export default function Home() {
     }, 2000);
     return () => clearTimeout(timeoutId);
   }, [titleNumber]);
+
+
+  // Responsavel por redirecionar para a rota de perguntas
+  const handleRedirectToQuestions = () => {
+
+    // Define o spinner no botão
+    setPeding(true);
+
+    // Delay para redirecionar
+    setTimeout(() => {
+      router.push("/quiz");
+    }, 2000);
+  }
 
   return (
     <div className="w-full">
@@ -69,8 +89,20 @@ export default function Home() {
               className="gap-4 cursor-pointer"
               variant="outline"
               aria-label="Iniciar o quiz"
+              onClick={handleRedirectToQuestions}
             >
-              Iniciar Quiz <MoveRight className="w-4 h-4" />
+            {isPeding
+              ? (
+                 <>
+                  Iniciar Quiz <Spinner size={"small"} className="w-4.5 h-4"/>
+                 </>
+                )
+              : (
+                  <>
+                    Iniciar Quiz <MoveRight className="w-4 h-4" />
+                  </>
+                )
+              }
             </Button>
             <AlertDialog>
               <AlertDialogTrigger asChild>
@@ -86,7 +118,8 @@ export default function Home() {
                 <AlertDialogHeader>
                   <AlertDialogTitle>Configurações do Quiz</AlertDialogTitle>
                   <AlertDialogDescription>
-                    Ajuste as configurações do quiz aqui, como nível de dificuldade ou tempo de resposta.
+                    Defina abaixo quantidade de questões que deseja realizar.
+                    <QuestionConfigAmount />
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
