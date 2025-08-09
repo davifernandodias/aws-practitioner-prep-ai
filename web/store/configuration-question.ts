@@ -23,5 +23,7 @@ export const useMeasurementTopics = create<MeasurementTopics>((set) => ({
 // Configuração inicial das questões
 export const useConfigurationQuestion = create<ConfigurationState>((set) => ({
   amount_question: 5,
-  setAmountQuestion: (value) => set({ amount_question: value })
+  id_questions: [],
+  setAmountQuestion: (value) => set({ amount_question: value }),
+  setIdQuestion: (value) => set({ id_questions: value })
 }));
