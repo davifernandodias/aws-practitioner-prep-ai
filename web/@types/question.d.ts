@@ -37,5 +37,7 @@ type MeasurementTopics = {
 
 type ConfigurationState = {
   amount_question: number;
+  id_questions: number[];
   setAmountQuestion: (value: number) => void;
+  setIdQuestion: (value: number[]) => void;
 };
