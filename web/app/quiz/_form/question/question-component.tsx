@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 import { SendQuestionsAndAnswers } from "./action";
 import { Progress } from "@/components/ui/progress";
 import { useConfigurationQuestion } from "@/store/configuration-question";
@@ -79,52 +79,57 @@ export default function QuestionComponent() {
         // Envia só o ID atual para simplicidade
         formData.append("id_array", id.toString());
         // Chama a action
-        try{
-            await action(formData);
 
-        // Apos resgatar a pergunta, passa a ser false
-        }finally{
-            setPedingInitialRequest(false);
-        }
+        startTransition(async () => {
+            try{
+
+
+                await action(formData);
+
+            // Apos resgatar a pergunta, passa a ser false
+            }finally{
+                setPedingInitialRequest(false);
+            }
+        })
     }
 
-    // Responsavel por controlar a paginação
-    const handleNextQuestion = () => {
-        // Valida se a pagina atual e menor do que a pagina final - 1 (se for menor que dizer que está dentro do limite)
-        if (isButtonDisabled) return;
+    // // Responsavel por controlar a paginação
+    // const handleNextQuestion = () => {
+    //     // Valida se a pagina atual e menor do que a pagina final - 1 (se for menor que dizer que está dentro do limite)
+    //     if (isButtonDisabled) return;
 
-        // Trava o botão
-        setIsButtonDisabled(true);
-
-
-        // libera o botão depois de 1 minuto (60000 ms)
-        setTimeout(() => {
-            setIsButtonDisabled(false);
-        }, 60000);
+    //     // Trava o botão
+    //     setIsButtonDisabled(true);
 
 
-        if (pageIndex < amount_question - 1) {
-            // Seta o pageIndex  + 1
-            setPageIndex((prev) => prev + 1);
+    //     // libera o botão depois de 1 minuto (60000 ms)
+    //     setTimeout(() => {
+    //         setIsButtonDisabled(false);
+    //     }, 60000);
 
-            // Inicializa variavel de controle para salvar no array
-            let numberRandom;
-            do {
-                numberRandom = Math.floor(Math.random() * 300) + 1;
-            } while (id_questions.includes(numberRandom));
 
-            // Adiciona outro numero aleatorio, no inicio do array
-            setIdQuestion([numberRandom, ...id_questions]);
-            // Se não, sobe o dialog
-        } else {
-            setIsDialogOpen(true);
-        }
-    }
+    //     if (pageIndex < amount_question - 1) {
+    //         // Seta o pageIndex  + 1
+    //         setPageIndex((prev) => prev + 1);
+
+    //         // Inicializa variavel de controle para salvar no array
+    //         let numberRandom;
+    //         do {
+    //             numberRandom = Math.floor(Math.random() * 300) + 1;
+    //         } while (id_questions.includes(numberRandom));
+
+    //         // Adiciona outro numero aleatorio, no inicio do array
+    //         setIdQuestion([numberRandom, ...id_questions]);
+    //         // Se não, sobe o dialog
+    //     } else {
+    //         setIsDialogOpen(true);
+    //     }
+    // }
 
     return (
 
         <div className="m-5 sm:m-10">
-            <form action={action} onSubmit={handleNextQuestion}>
+            <form action={action}>
                 {isPending && isPedingInitialRequest ? <>carregando</> : <>carregou</>}
                 {/* Exibe erro ou questão, se disponível */}
                 {state?.error && <p className="text-red-500">{state.error}</p>}
