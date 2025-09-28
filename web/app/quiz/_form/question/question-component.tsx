@@ -20,7 +20,6 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Progress } from "@/components/ui/progress"
 import { TextAnimate } from "@/components/ui/text-animate"
-import type { Question } from "@/types/question" // Import the Question type
 
 export default function QuestionComponent() {
   // Estado para acompanhar o envio da resposta e o carregamento
@@ -90,7 +89,7 @@ export default function QuestionComponent() {
   }
 
   // Responsável por controlar a paginação
-  const handleNextQuestion = (event: any) => {
+  const handleNextQuestion = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     // Se já estiver true (resposta já está visivel)
     if (showResponse) {

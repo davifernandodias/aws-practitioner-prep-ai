@@ -13,14 +13,16 @@ export default function QuestionConfigAmount() {
 
 
     // Valida se esta dentro do intervalo
-    const handleChangeAmountQuestion = (e : any) => {
-        if(e < 1){
-            e = 1;
+    const handleChangeAmountQuestion = (e : string) => {
+        let num = Number(e);
+
+        if(num < 1){
+            num = 1;
         }
-        if(e > 20){
-            e = 20
+        if(num > 20){
+            num = 20
         }
-        setAmountQuestion(e);
+        setAmountQuestion(num);
     }
     return (
         <div>
