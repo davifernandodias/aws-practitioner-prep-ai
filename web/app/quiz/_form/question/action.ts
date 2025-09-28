@@ -6,7 +6,7 @@ import { getQuestionRandomQuestion } from "@/service/random-question";
 
 
 // Action que dispara a busca pro service que retorna a questão com base no id aleatório
-export const SendQuestionsAndAnswers = async (currentState: any, formData: FormData) => {
+export const SendQuestionsAndAnswers = async (currentState: unknown, formData: FormData) => {
     try {
         // Salva os ids recebidos (string)
         const stringIds = formData.get("id_array");
