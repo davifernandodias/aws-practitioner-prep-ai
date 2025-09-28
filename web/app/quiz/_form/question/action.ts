@@ -1,8 +1,11 @@
 "use server"
 
-import { getQuestionRandomQuestion } from "@/service/random-question"
+import { getQuestionRandomQuestion } from "@/service/random-question";
 
-// Resgata a questão
+
+
+
+// Action que dispara a busca pro service que retorna a questão com base no id aleatório
 export const SendQuestionsAndAnswers = async (currentState: any, formData: FormData) => {
     try {
         // Salva os ids recebidos (string)
@@ -13,23 +16,18 @@ export const SendQuestionsAndAnswers = async (currentState: any, formData: FormD
 
         // Consulta via service serve side (utilizado o primeiro id)
         const response = await getQuestionRandomQuestion(arrayIds[0])
-        console.log("acabou")
 
-        // Valida se não retornou a questão
-        if (response.question == null) {
+        // Verifica se retornou algum tipo de erro
+        if(response.code != 0 || response.erro || !response.sucess){
+
+            // Retorna a mensagem recebida
             return {
-                // Retorna msg de que não foi retornado nada
-                error: response.message || "Nenhuma questão encontrada."
+                error: response.message,
+                question: false
             }
         }
 
-        // Valida se não tem erro
-        if (response.erro) {
-            return {
-                // Retorna msg de erro
-                error: response.message || "Erro ao buscar a questão."
-            }
-        }
+
 
         // Caso passe por todas as validações, cai no caso de sucesso e retorna a msg e a questão
         return {
