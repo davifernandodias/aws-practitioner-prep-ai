@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "awspassei",
+  title: "AWS Passei",
   description: "Social project to help people achieve the AWS Cloud Practitioner (CLF-C02) certification.",
 };
 
