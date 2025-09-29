@@ -27,9 +27,9 @@ export default function QuestionConfigAmount() {
     return (
         <div>
             <div className="flex sm:flex-col  gap-1.5 mt-5 text-start">
-                <p className="md:w-full  font-medium text-gray-900 ">Quantidade de questões.</p>
+                <p className="md:w-full  font-medium dark:text-white ">Quantidade de questões.</p>
                 <Input
-                className="w-40 border-gray-400 text-gray-900"
+                className="w-40 border-gray-400 text-gray-900 dark:text-white"
                 type="number"
                 value={amount_question}
                 onChange={(e) => handleChangeAmountQuestion(e.target.value)}
