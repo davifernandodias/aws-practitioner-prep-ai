@@ -19,7 +19,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install
+        run: cd web && npm install
 
   unusedexports:
     name: Find unused exports (dead code)
@@ -32,8 +32,8 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          path: web/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('web/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
 
