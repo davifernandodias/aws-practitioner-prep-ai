@@ -34,4 +34,4 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Run ts-prune
-        run: npx ts-prune --error
+        run: cd web && npx ts-prune --error
