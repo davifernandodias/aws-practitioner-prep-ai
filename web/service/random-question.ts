@@ -1,5 +1,4 @@
-import { promises as fs } from "fs";
-import path from "path";
+import dataJson from '../data/data_question.json';
 
 export async function getQuestionRandomQuestion(
   id: number,
@@ -7,37 +6,6 @@ export async function getQuestionRandomQuestion(
   level_of_complexity?: number
 ) {
   try {
-    // Caminhos possíveis (ordem de prioridade)
-    const possiblePaths = [
-      path.join(process.cwd(), "data/data_question.json"),
-      path.join(process.cwd(), "public/data/data_question.json"),
-      path.join(process.cwd(), "public/data_question.json"),
-      path.join(process.cwd(), "/data_question.json")
-    ];
-
-    let resolvePath = null;
-
-    // Verifica qual existe (local ou produção)
-    for (const p of possiblePaths) {
-      try {
-        await fs.access(p);
-        resolvePath = p;
-        break;
-      } catch {}
-    }
-
-    if (!resolvePath) {
-      return {
-        sucess: false,
-        message: "Arquivo data_question.json não encontrado.",
-        question: false,
-        erro: true,
-        code: 1,
-      };
-    }
-
-    const data = await fs.readFile(resolvePath, "utf8");
-    const dataJson = JSON.parse(data);
 
     return {
       sucess: true,
