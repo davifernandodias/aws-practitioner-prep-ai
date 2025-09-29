@@ -93,7 +93,7 @@ export default function QuestionComponent() {
     event.preventDefault()
     // Se já estiver true (resposta já está visivel)
     if (showResponse) {
-      //Valida se a pagina atual e menor do que a pagina final - 1 (se for menor que dizer que está dentro do limite)
+      //Valida se a pagina atual e menor do que a pagina final - 1 (se for menor que dizer que está dentro do limite).
       if (pageIndex < amount_question - 1) {
         // Seta o pageIndex  + 1
         setPageIndex((prev) => prev + 1)
