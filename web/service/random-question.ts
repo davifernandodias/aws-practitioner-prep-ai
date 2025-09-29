@@ -12,6 +12,7 @@ export async function getQuestionRandomQuestion(
       path.join(process.cwd(), "data/data_question.json"),
       path.join(process.cwd(), "public/data/data_question.json"),
       path.join(process.cwd(), "public/data_question.json"),
+      path.join(process.cwd(), "/data_question.json")
     ];
 
     let resolvePath = null;
