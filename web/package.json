@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build && npm run copy-data",
-    "copy-data": "mkdir -p public/data && cp -r data/data_question.json public/data/data_question.json",
+    "build": "next build",
+    "prebuild": "mkdir -p public/data && cp -r data/data_question.json public/data/data_question.json",
     "start": "next start",
     "lint": "next lint"
   },
